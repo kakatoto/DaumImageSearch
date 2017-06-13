@@ -13,9 +13,6 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by USER on 2017-01-09.
- */
 
 public class RestfulAdapter {
     public static final int CONNECT_TIMEOUT = 15;

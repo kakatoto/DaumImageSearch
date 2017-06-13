@@ -11,9 +11,7 @@ import javax.inject.Inject;
 
 import io.realm.RealmResults;
 
-/**
- * Created by hwoh on 2017. 6. 12..
- */
+
 
 public class MainPresenter implements IMainContract.Presenter {
     private IMainContract.View view;
@@ -63,7 +61,6 @@ public class MainPresenter implements IMainContract.Presenter {
                 for(int i=0;i<suggests.size();i++){
                     suggestArray[i] = suggests.get(i).getSuggest();
                 }
-
                 view.setSuggest(suggestArray);
             }
 

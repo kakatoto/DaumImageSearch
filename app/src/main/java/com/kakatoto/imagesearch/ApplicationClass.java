@@ -10,9 +10,6 @@ import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 
 import io.realm.Realm;
 
-/**
- * Created by hwoh on 2017. 6. 12..
- */
 
 public class ApplicationClass extends Application {
 

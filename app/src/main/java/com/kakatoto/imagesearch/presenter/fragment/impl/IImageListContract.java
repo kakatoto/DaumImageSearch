@@ -6,9 +6,7 @@ import com.kakatoto.imagesearch.ui.MainActivity;
 
 import java.util.List;
 
-/**
- * Created by hwoh on 2017. 6. 12..
- */
+
 
 public interface IImageListContract {
     interface View {
@@ -19,6 +17,8 @@ public interface IImageListContract {
         void setRecycler();
 
         List<Tag> getTagList();
+
+        void showScrapAlert(int pos);
 
         void showLoding();
 
@@ -44,5 +44,12 @@ public interface IImageListContract {
 
         void onLoadMore();
 
+        void onScrapImage(int pos);
+
+    }
+
+
+    interface ImageScrapListener{
+        void onImageScrap();
     }
 }

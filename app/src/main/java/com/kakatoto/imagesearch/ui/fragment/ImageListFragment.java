@@ -1,10 +1,12 @@
 package com.kakatoto.imagesearch.ui.fragment;
 
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -29,13 +31,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- * Created by hwoh on 2017. 6. 12..
- */
 
 public class ImageListFragment extends Fragment implements IImageListContract.View {
-    private final static String TAG = ImageListFragment.class.getSimpleName();
-
     private ImageListPresenter presenter;
 
     @BindView(R.id.tag_group)
@@ -74,7 +71,7 @@ public class ImageListFragment extends Fragment implements IImageListContract.Vi
         View view = inflater.inflate(R.layout.fragment_image_list, container, false);
         ButterKnife.bind(this, view);
 
-        this.presenter = new ImageListPresenter();
+        this.presenter = new ImageListPresenter(getActivity());
         this.presenter.attatch(this);
 
         return view;
@@ -135,6 +132,25 @@ public class ImageListFragment extends Fragment implements IImageListContract.Vi
     @Override
     public List getTagList() {
         return tagGroup.getTags();
+    }
+
+
+    @Override
+    public void showScrapAlert(final int pos) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+        dialog.setMessage(getString(R.string.alert_save_message))
+                .setPositiveButton(getString(R.string.alert_positive_button), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        presenter.onScrapImage(pos);
+                    }
+                })
+                .setNegativeButton(getString(R.string.alert_negative_button), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                }).create().show();
     }
 
     @Override

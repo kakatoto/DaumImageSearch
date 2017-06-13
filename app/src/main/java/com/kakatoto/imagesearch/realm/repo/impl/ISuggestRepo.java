@@ -5,9 +5,6 @@ import com.kakatoto.imagesearch.model.Suggest;
 
 import io.realm.RealmResults;
 
-/**
- * Created by ohyowan on 2017. 5. 20..
- */
 
 public interface ISuggestRepo {
     interface OnSaveSuggestCallBack{

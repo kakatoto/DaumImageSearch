@@ -7,13 +7,8 @@ import com.kakatoto.imagesearch.realm.repo.impl.ISuggestRepo;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-/**
- * Created by darong on 2017. 5. 23..
- */
 
 public class SuggestRepo implements ISuggestRepo {
-
-    private final String TAG = ImageScrapRepo.class.getSimpleName();
     private Realm realm;
 
     public SuggestRepo(Realm realm) {

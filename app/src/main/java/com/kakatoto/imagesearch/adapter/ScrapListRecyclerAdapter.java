@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.kakatoto.imagesearch.R;
-import com.kakatoto.imagesearch.model.ImageSearchResult.ChannelBean;
+import com.kakatoto.imagesearch.model.ScrapBean;
 import com.kakatoto.imagesearch.util.CommonUtil;
 
 import java.util.List;
@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 public class ScrapListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private String TAG = ScrapListRecyclerAdapter.class.getSimpleName();
     //Data
-    private List<ChannelBean.ItemBean> itemList;
+    private List<ScrapBean> itemList;
     private Context context;
     private OnItemSelectListener onItemSelectListener;
 
@@ -31,7 +31,7 @@ public class ScrapListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.
         this.context = context;
     }
 
-    public void setItemList(List<ChannelBean.ItemBean> itemList) {
+    public void setItemList(List<ScrapBean> itemList) {
         this.itemList = itemList;
     }
 
@@ -52,7 +52,7 @@ public class ScrapListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.
 
         String thumbnailUrl = "";
 
-        ChannelBean.ItemBean item = itemList.get(pos);
+        ScrapBean item = itemList.get(pos);
 
         if (!CommonUtil.isNull(item.getThumbnail()))
             thumbnailUrl = item.getThumbnail();

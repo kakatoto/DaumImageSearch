@@ -1,61 +1,47 @@
 package com.kakatoto.imagesearch.presenter.fragment;
 
-import android.util.Log;
+import android.content.Context;
 
-import com.cunoraz.tagview.Tag;
 import com.kakatoto.imagesearch.ApplicationClass;
-import com.kakatoto.imagesearch.R;
 import com.kakatoto.imagesearch.adapter.ImageListRecyclerAdapter;
-import com.kakatoto.imagesearch.model.ImageSearchResult;
-import com.kakatoto.imagesearch.model.Suggest;
+import com.kakatoto.imagesearch.model.ScrapBean;
+import com.kakatoto.imagesearch.model.SearchResult;
 import com.kakatoto.imagesearch.presenter.fragment.impl.IImageListContract;
-import com.kakatoto.imagesearch.presenter.impl.IMainContract;
-import com.kakatoto.imagesearch.realm.repo.ImageScrapRepo;
-import com.kakatoto.imagesearch.realm.repo.SuggestRepo;
-import com.kakatoto.imagesearch.realm.repo.impl.ISuggestRepo;
-import com.kakatoto.imagesearch.ui.MainActivity;
+import com.kakatoto.imagesearch.realm.repo.ScrapRepo;
+import com.kakatoto.imagesearch.realm.repo.impl.IScrapRepo;
 import com.kakatoto.imagesearch.util.CommonUtil;
 import com.kakatoto.imagesearch.util.IConstant;
 import com.kakatoto.imagesearch.util.retrofit.RestfulInterface;
-import com.kakatoto.imagesearch.model.ImageSearchResult.ChannelBean;
-import com.wang.avi.AVLoadingIndicatorView;
+import com.kakatoto.imagesearch.model.SearchResult.ChannelBean;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import io.realm.Realm;
-import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Query;
 
-/**
- * Created by hwoh on 2017. 6. 12..
- */
 
-public class ImageListPresenter implements IImageListContract.Presenter {
-    private final static String TAG = ImageListPresenter.class.getSimpleName();
+public class ImageListPresenter implements IImageListContract.Presenter{
     private IImageListContract.View view;
     private ImageListRecyclerAdapter adapter;
 
     private int page;
     private String query;
+    private IImageListContract.ImageScrapListener scrapListener;
 
     @Inject
     RestfulInterface retroInterface;
-
     @Inject
-    ImageScrapRepo scrapRepo;
+    ScrapRepo scrapRepo;
 
     private ArrayList<ChannelBean.ItemBean> itemList = new ArrayList<>();
 
-    public ImageListPresenter() {
+    public ImageListPresenter(Context context) {
         this.page = 1;
         this.query = "";
+        this.scrapListener = (IImageListContract.ImageScrapListener) context;
         ApplicationClass.getInstance().getAppComponent().inject(this);
     }
 
@@ -83,11 +69,11 @@ public class ImageListPresenter implements IImageListContract.Presenter {
         this.adapter.setOnItemSelectListener(new ImageListRecyclerAdapter.OnItemSelectListener() {
             @Override
             public void onItemSelect(int pos) {
-                Log.d(TAG, "onItemSelect: " + pos);
+                view.showScrapAlert(pos);
             }
         });
 
-        getList(true);
+        this.getList(true);
     }
 
     @Override
@@ -118,31 +104,29 @@ public class ImageListPresenter implements IImageListContract.Presenter {
     @Override
     public void reqeustImageList(int p, String q) {
         this.view.showLoding();
-        final retrofit2.Call<ImageSearchResult> call = retroInterface.requestImageList(IConstant.API_KEY, q, IConstant.LIMIT, p, IConstant.TYPE);
-        call.enqueue(new Callback<ImageSearchResult>() {
+        final retrofit2.Call<SearchResult> call = retroInterface.requestImageList(IConstant.API_KEY, q, IConstant.LIMIT, p, IConstant.TYPE);
+        call.enqueue(new Callback<SearchResult>() {
             @Override
-            public void onResponse(Call<ImageSearchResult> call, Response<ImageSearchResult> response) {
+            public void onResponse(Call<SearchResult> call, Response<SearchResult> response) {
                 if (CommonUtil.isNull(view))
                     return;
                 view.hideLoding();
-                ImageSearchResult results = response.body();
+                SearchResult results = response.body();
                 if (!CommonUtil.isNull(results)) {
                     ChannelBean bean = results.getChannel();
                     for (ChannelBean.ItemBean item : bean.getItem()) {
                         itemList.add(item);
                     }
                     adapter.notifyDataSetChanged();
-
                     page = countCheck(bean.getTotalCount());
                 }
             }
 
             @Override
-            public void onFailure(Call<ImageSearchResult> call, Throwable t) {
+            public void onFailure(Call<SearchResult> call, Throwable t) {
                 if (CommonUtil.isNull(view))
                     return;
                 view.hideLoding();
-                Log.d(TAG, "onFailure: " + t.toString());
             }
         });
     }
@@ -170,4 +154,25 @@ public class ImageListPresenter implements IImageListContract.Presenter {
         return sb.toString();
     }
 
+    @Override
+    public void onScrapImage(int pos) {
+        ChannelBean.ItemBean rawData = itemList.get(pos);
+        ScrapBean scrapBean = new ScrapBean();
+        scrapBean.setThumbnail(rawData.getThumbnail());
+
+        scrapRepo.addScrapObject(scrapBean, new IScrapRepo.OnScrapCallBack() {
+            @Override
+            public void onSuccess() {
+                if (CommonUtil.isNull(view))
+                    return;
+                scrapListener.onImageScrap();
+            }
+
+            @Override
+            public void onError(String message) {
+                if (CommonUtil.isNull(view))
+                    return;
+            }
+        });
+    }
 }

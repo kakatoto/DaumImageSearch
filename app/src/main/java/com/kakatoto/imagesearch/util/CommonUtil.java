@@ -9,9 +9,6 @@ import android.util.Log;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by ohyowan on 16. 5. 22..
- */
 public class CommonUtil {
     private static final String TAG = CommonUtil.class.getSimpleName();
 
@@ -47,9 +44,6 @@ public class CommonUtil {
         return versionName;
     }
 
-    /**
-     * Dp to Px
-     */
     public static int convertDpToPx(Context ctx, float dp) {
         float d = ctx.getResources().getDisplayMetrics().density;
         return (int) (d * dp);

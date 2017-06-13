@@ -1,22 +1,18 @@
 package com.kakatoto.imagesearch.realm.repo.impl;
 
-import com.kakatoto.imagesearch.model.ImageScrap;
+import com.kakatoto.imagesearch.model.ScrapBean;
 
 import io.realm.RealmResults;
 
-/**
- * Created by ohyowan on 2017. 5. 20..
- */
+public interface IScrapRepo {
 
-public interface IImageScrapRepo {
-
-    interface OnSaveScrapCallBack {
+    interface OnScrapCallBack {
         void onSuccess();
         void onError(String message);
     }
 
     interface OnGetAllScrapCallBack {
-        void onSuccess(RealmResults<ImageScrap> memos);
+        void onSuccess(RealmResults<ScrapBean> scrap);
         void onError(String message);
     }
 
@@ -27,10 +23,10 @@ public interface IImageScrapRepo {
     }
 
 
-    void addScrapObject(ImageScrap image, OnSaveScrapCallBack callBack);
+    void addScrapObject(ScrapBean scrap, OnScrapCallBack callBack);
 
     void getAllScrapObject(OnGetAllScrapCallBack callBack);
 
-    void deleteMemoByKey(Long key, OnDeleteScrapCallBack callBack);
+    void deleteScrapByKey(Long key, OnDeleteScrapCallBack callBack);
 
 }

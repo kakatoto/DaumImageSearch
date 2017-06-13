@@ -3,14 +3,12 @@ package com.kakatoto.imagesearch.model;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-/**
- * Created by darong on 2017. 6. 13..
- */
 
-public class ImageScrap extends RealmObject {
+public class ScrapBean extends RealmObject {
     @PrimaryKey
     long mKey;
     String thumbnail;
+    String image;
 
     public long getmKey() {
         return mKey;
@@ -26,5 +24,13 @@ public class ImageScrap extends RealmObject {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

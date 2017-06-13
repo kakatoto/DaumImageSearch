@@ -4,12 +4,7 @@ import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-/*
-* 2단또는 단수가 높아지는 그리드 뷰의 경우 xml에서 아이템에 패딩을 설정해줄경우 좌측에 있는 아이템과 우측아이템의
-* 패딩이 동일하게 적용되어 중간의 패딩이 좌측 아이템 우측 아이템 합쳐진 패딩이 나타나게 된다
-* 그럴경우 xml에서 패딩을 조절 하지 말고
-* 코드에서 만약 우측 아이템일경우 padding-left를 빼주게 되면 여백이 골고루 들어가게 된다
-* */
+
 public class RecyclerDecGrid extends RecyclerView.ItemDecoration {
     private int spanCount;
     private int spacing;

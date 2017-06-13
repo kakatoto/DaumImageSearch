@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.kakatoto.imagesearch.R;
-import com.kakatoto.imagesearch.model.ImageSearchResult.ChannelBean;
+import com.kakatoto.imagesearch.model.SearchResult.ChannelBean;
 import com.kakatoto.imagesearch.util.CommonUtil;
 
 import java.util.List;

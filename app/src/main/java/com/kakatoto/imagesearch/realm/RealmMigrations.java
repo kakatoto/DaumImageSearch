@@ -16,7 +16,7 @@ public class RealmMigrations implements RealmMigration{
         final RealmSchema schema = realm.getSchema();
 
         if (oldVersion == 1) {
-            final RealmObjectSchema userSchema = schema.get("ImageScrap");
+            final RealmObjectSchema userSchema = schema.get("ScrapBean");
             userSchema.addField("mKey", long.class);
         }
     }
