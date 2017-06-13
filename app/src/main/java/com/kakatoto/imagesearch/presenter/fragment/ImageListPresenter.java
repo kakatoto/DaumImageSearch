@@ -10,6 +10,7 @@ import com.kakatoto.imagesearch.model.ImageSearchResult;
 import com.kakatoto.imagesearch.model.Suggest;
 import com.kakatoto.imagesearch.presenter.fragment.impl.IImageListContract;
 import com.kakatoto.imagesearch.presenter.impl.IMainContract;
+import com.kakatoto.imagesearch.realm.repo.ImageScrapRepo;
 import com.kakatoto.imagesearch.realm.repo.SuggestRepo;
 import com.kakatoto.imagesearch.realm.repo.impl.ISuggestRepo;
 import com.kakatoto.imagesearch.ui.MainActivity;
@@ -44,11 +45,11 @@ public class ImageListPresenter implements IImageListContract.Presenter {
     private int page;
     private String query;
 
-
-
     @Inject
     RestfulInterface retroInterface;
 
+    @Inject
+    ImageScrapRepo scrapRepo;
 
     private ArrayList<ChannelBean.ItemBean> itemList = new ArrayList<>();
 

@@ -2,6 +2,7 @@ package com.kakatoto.imagesearch.di.modules;
 
 import android.app.Application;
 
+import com.kakatoto.imagesearch.realm.repo.ImageScrapRepo;
 import com.kakatoto.imagesearch.realm.repo.SuggestRepo;
 import com.kakatoto.imagesearch.util.retrofit.RestfulAdapter;
 import com.kakatoto.imagesearch.util.retrofit.RestfulInterface;
@@ -29,5 +30,10 @@ public class AppModule {
     @Provides
     public SuggestRepo provideSuggestRepo() {
         return new SuggestRepo(Realm.getDefaultInstance());
+    }
+
+    @Provides
+    public ImageScrapRepo provideImageScrapRepo() {
+        return new ImageScrapRepo(Realm.getDefaultInstance());
     }
 }
