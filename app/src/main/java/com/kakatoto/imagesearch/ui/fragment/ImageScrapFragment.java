@@ -12,7 +12,7 @@ import com.kakatoto.imagesearch.ui.MainActivity;
 import butterknife.ButterKnife;
 
 /**
- * Created by darong on 2017. 6. 12..
+ * Created by hwoh on 2017. 6. 12..
  */
 
 public class ImageScrapFragment extends Fragment{

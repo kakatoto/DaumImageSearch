@@ -3,7 +3,7 @@ package com.kakatoto.imagesearch.model;
 import java.util.List;
 
 /**
- * Created by darong on 2017. 6. 12..
+ * Created by hwoh on 2017. 6. 12..
  */
 
 public class ImageSearchResult {

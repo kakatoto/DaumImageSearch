@@ -60,6 +60,7 @@ public class ImageListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.
 
         Glide.with(context).load(thumbnailUrl)
                 .centerCrop()
+                .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(holder.imgThumbnail);
 

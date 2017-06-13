@@ -5,7 +5,7 @@ import com.kakatoto.imagesearch.presenter.impl.IMainContract;
 import com.kakatoto.imagesearch.ui.MainActivity;
 
 /**
- * Created by darong on 2017. 6. 12..
+ * Created by hwoh on 2017. 6. 12..
  */
 
 public class ImageScrapPresenter implements IImageScrapContract.Presenter {

@@ -18,7 +18,8 @@ public interface RestfulInterface {
     Call<ImageSearchResult> requestImageList(@Query("apikey") String apikey,
                                              @Query(value = "q", encoded = true) String query,
                                              @Query("result") int result,
-                                             @Query("pageno") int pageNo);
+                                             @Query("pageno") int pageNo,
+                                             @Query("output") String type);
 
 
   /*  @FormUrlEncoded

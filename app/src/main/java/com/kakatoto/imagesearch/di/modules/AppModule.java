@@ -2,15 +2,15 @@ package com.kakatoto.imagesearch.di.modules;
 
 import android.app.Application;
 
+import com.kakatoto.imagesearch.realm.repo.SuggestRepo;
 import com.kakatoto.imagesearch.util.retrofit.RestfulAdapter;
 import com.kakatoto.imagesearch.util.retrofit.RestfulInterface;
 
 import dagger.Module;
 import dagger.Provides;
+import io.realm.Realm;
 
-/**
- * Created by lee on 2016. 8. 16..
- */
+
 @Module
 public class AppModule {
 
@@ -25,4 +25,9 @@ public class AppModule {
         return RestfulAdapter.getInstance();
     }
 
+
+    @Provides
+    public SuggestRepo provideSuggestRepo() {
+        return new SuggestRepo(Realm.getDefaultInstance());
+    }
 }

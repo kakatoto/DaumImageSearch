@@ -2,4 +2,7 @@
     <string name="app_name">ImageSearch</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="tab_name1">검색결과</string>
+    <string name="tab_name2">스크랩</string>
 </resources>

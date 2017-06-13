@@ -1,21 +1,48 @@
 package com.kakatoto.imagesearch.presenter.fragment.impl;
 
+import com.cunoraz.tagview.Tag;
 import com.kakatoto.imagesearch.adapter.ImageListRecyclerAdapter;
 import com.kakatoto.imagesearch.ui.MainActivity;
 
+import java.util.List;
+
 /**
- * Created by darong on 2017. 6. 12..
+ * Created by hwoh on 2017. 6. 12..
  */
 
 public interface IImageListContract {
-    interface View{
+    interface View {
+        void addSearchTag(String query);
 
+        void setTagLayout();
+
+        void setRecycler();
+
+        List<Tag> getTagList();
+
+        void showLoding();
+
+        void hideLoding();
     }
 
-    interface Presenter{
+    interface Presenter {
         void attatch(View view);
+
         void deatch();
+
         void setAdapter(ImageListRecyclerAdapter adapter);
-        void reqeustImageList(String query);
+
+        void getList(boolean isRefresh);
+
+        void reqeustImageList(int page, String query);
+
+        String setQuery();
+
+        int countCheck(String total);
+
+        void onRefesh();
+
+        void onLoadMore();
+
     }
 }
